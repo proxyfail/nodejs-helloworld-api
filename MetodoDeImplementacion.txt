@@ -32,7 +32,7 @@ ngrok http 8080
 
 Copiar y pegar la url que aparece en Forwarding en un navegador para acceder a jenkins
 
-8- Ejecutar los comandos que se encuentran en: https://github.com/yosoyfunes/nodejs-helloworld-api
+8- Ejecutar los comandos que se encuentran en: https://github.com/yosoyfunes/nodejs-helloworld-api en el archivo README.md
 
 9- En nuestro proyecto de Github vamos a crear un webhook, para lo cual vamos a ir a -settings y luego a webhook.
 En el campo payload vamos a copiar y pegar la url que figura en la terminar donde activamos Ngrok que se encuentra en forwarding y actoseguido lo separaremos de un / e incluiremos actoseguido "github-webhook" y pondremos otro / para terminar, y creamos.
