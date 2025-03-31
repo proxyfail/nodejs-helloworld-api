@@ -1,0 +1,58 @@
+1- Realizar un fork del siguiente proyecto: https://github.com/yosoyfunes/nodejs-helloworld-api
+2- Instalar ngrok:
+curl -sSL https://ngrok-agent.s3.amazonaws.com/ngrok.asc \
+  | sudo tee /etc/apt/trusted.gpg.d/ngrok.asc >/dev/null \
+  && echo "deb https://ngrok-agent.s3.amazonaws.com buster main" \
+  | sudo tee /etc/apt/sources.list.d/ngrok.list \
+  && sudo apt update \
+  && sudo apt install ngrok
+
+3- En caso de no poseer una cuenta en ngrok crear una, caso contrario ejecutar el siguiente comando:
+ngrok config add-authtoken <token>
+
+4- Iniciar ngrok en el puerto 8080, ya que por defecto la instalacion de jenkins la realizaremos en el puerto 8080
+ngrok http 80
+
+5- Instalar jenkins:
+sudo wget -O /usr/share/keyrings/jenkins-keyring.asc \
+  https://pkg.jenkins.io/debian-stable/jenkins.io-2023.key
+echo "deb [signed-by=/usr/share/keyrings/jenkins-keyring.asc]" \
+  https://pkg.jenkins.io/debian-stable binary/ | sudo tee \
+  /etc/apt/sources.list.d/jenkins.list > /dev/null
+sudo apt-get update
+sudo apt-get install jenkins
+
+6 - Iniciar los servicios de jenkins:
+sudo systemctl enable jenkins
+sudo systemctl start jenkins
+sudo systemctl status jenkins
+
+7- Iniciar ngrok con el siguiente comando:
+ngrok http 8080
+
+Copiar y pegar la url que aparece en Forwarding en un navegador para acceder a jenkins
+
+8- Ejecutar los comandos que se encuentran en: https://github.com/yosoyfunes/nodejs-helloworld-api
+
+9- En nuestro proyecto de Github vamos a crear un webhook, para lo cual vamos a ir a -settings y luego a webhook.
+En el campo payload vamos a copiar y pegar la url que figura en la terminar donde activamos Ngrok que se encuentra en forwarding y actoseguido lo separaremos de un / e incluiremos actoseguido "github-webhook" y pondremos otro / para terminar, y creamos.
+
+10- dentro de Jenkins vamos a configurar el pipeline
+Copiamos y pegamos la url que nos da el campo forwarding de ngrok para poder abrir jenkins.
+Una vez dentro vamos a crear una nueva tarea y le pondremos un nombre ademas de seleccionar que se tratara de un pipeline.
+Vamos a indicar en el campo github proyect la url del proyecto donde creamos el webhook.
+En el campo Git pegamos la url del proyecto donde se encuentra el webhook.
+Para el campo de credenciales vamos a crear un nuevo token en github para lo cual vamos a ir a settings y luego a developer settings. Una vez alli vamos a seleccionar la opcion de personal acceso tokens e indicaremos que se trata de un token clasic el cual vamos a indicar como public una vez hayamos accedidi a generete new token y generete new token classic. Alli indicaremos el nombre que querramos , seleccionaremos una fecha de expiracion o indicaremos que no posee y settearemos en caso de requerir algunas opciones aun que en este caso no seleccionaremos nunguna y se creara el token con las opciones por defecto.
+
+11- Para cargar el token nos dirigiremos a Panel de control en Jenkins, Administrar Jenkins y buscaremos en Security la opcion Credentials.
+Una vez dentro crearemos una con el nomnbre que querramos e indicaremos en el campo Id el token que obtuvimos de github, salvamos y listo!
+
+12 - Ahora que tenemos nuestra credencial la utilizaremos continuando desde nos quedamos en el punto 10. En el campo Credencials seleccinoaremos la credencial que acabamos de crear en el punto anterior.
+
+13- seleccinoaremos la rama que hayamos creado o en caso de no haber creado ninguna indicaremos la que figura en el proyecto, en un caso standar la opcion es la siguiente: */main
+
+14- tildamos la opcion github hook trigger for GITScm polling y salvamos.
+
+15- Ahora si, una vez creado y configurado todo podemos darle play a nuestro pipeline y ver como se ejecuta.
+
+En los adjuntos dejo prints de pantalla de como se ejecuto el pipeline, adeas en el archivo 2.txt tenemos el log de ejecucion, y en el archivo "diagrama de pipeline" un diagrama de este.

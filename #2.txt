@@ -1,0 +1,20 @@
+Lanzada por el usuario admin
+Running as SYSTEM
+Ejecutando. en el espacio de trabajo /var/lib/jenkins/workspace/Desafio2
+The recommended git tool is: NONE
+using credential 658af0ac-3df6-4305-897a-621feab0cc23
+ > git rev-parse --resolve-git-dir /var/lib/jenkins/workspace/Desafio2/.git # timeout=10
+Fetching changes from the remote Git repository
+ > git config remote.origin.url https://github.com/proxyfail/nodejs-helloworld-api.git # timeout=10
+Fetching upstream changes from https://github.com/proxyfail/nodejs-helloworld-api.git
+ > git --version # timeout=10
+ > git --version # 'git version 2.43.0'
+using GIT_ASKPASS to set credentials 
+ > git fetch --tags --force --progress -- https://github.com/proxyfail/nodejs-helloworld-api.git +refs/heads/*:refs/remotes/origin/* # timeout=10
+ > git rev-parse refs/remotes/origin/main^{commit} # timeout=10
+Checking out Revision 874f3ded912f40aa534b6a538417e43225cb6fbb (refs/remotes/origin/main)
+ > git config core.sparsecheckout # timeout=10
+ > git checkout -f 874f3ded912f40aa534b6a538417e43225cb6fbb # timeout=10
+Commit message: "docker"
+ > git rev-list --no-walk 874f3ded912f40aa534b6a538417e43225cb6fbb # timeout=10
+Finished: SUCCESS
